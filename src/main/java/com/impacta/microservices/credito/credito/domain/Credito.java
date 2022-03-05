@@ -20,7 +20,7 @@ public class Credito implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_transacao")
     private Integer idTransacao;
-
+   
     @Column(name = "conta_id")
     private Integer contaId;
 
@@ -33,14 +33,14 @@ public class Credito implements Serializable {
     @Column(name = "tipo_conta")
     private String tipoConta;
 
-
+    
     public Credito() {
         super();
     }
 
     @JsonCreator
-    public Credito( @JsonProperty("id_transacao") Integer idTransacao,
-                    @JsonProperty("conta_id") Integer contaId,
+    public Credito( @JsonProperty("id_transacao") Integer idTransacao, 
+                    @JsonProperty("conta_id") Integer contaId, 
                     @JsonProperty("valor_credito") double valorCredito,
                     @JsonProperty("cliente_id") Integer clienteId,
                     @JsonProperty("tipo_conta") String tipoConta)

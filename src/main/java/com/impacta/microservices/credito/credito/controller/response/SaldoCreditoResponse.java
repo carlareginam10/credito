@@ -1,23 +1,22 @@
 package com.impacta.microservices.credito.credito.controller.response;
 
-import com.impacta.microservices.credito.credito.domain.Credito;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public interface CreditoRepository extends JpaRepository<Credito, Integer>{
+public class SaldoCreditoResponse {
 
-    List<Credito> findByContaIdAndTipoConta(Integer contaId, String tipoConta);
+    private double saldoCredito;
 
-    List<Credito> findByTipoConta(@Param("tipoConta") String tipoConta);
+    @JsonCreator
+    public SaldoCreditoResponse(@JsonProperty("saldo_credito") double saldoCredito){
+        this.saldoCredito = saldoCredito;
+    }
 
-    @Query(value = "select * from credito", nativeQuery = true )
-    List<Credito> listarContas();
+    public double getSaldoCredito() {
+        return saldoCredito;
+    }
 
-    @Query(value = "select SUM(valor_credito) from credito where conta_id = ?1", nativeQuery = true)
-    double findByContaIdSaldoCredito(Integer contaId);
-
-    @Query(value = "select SUM(valor_credito) from credito where conta_id = ?1 and tipo_conta = ?2", nativeQuery = true)
-    double findBySaldoCreditoPorTipoConta(Integer contaId, String tipoConta);
+    public void setSaldoCredito(double saldoCredito) {
+        this.saldoCredito = saldoCredito;
+    }
 }

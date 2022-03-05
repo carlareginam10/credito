@@ -1,12 +1,14 @@
 package com.impacta.microservices.credito.credito.controller;
 
 
-import java.util.List;
 import com.impacta.microservices.credito.credito.controller.response.SaldoCreditoResponse;
 import com.impacta.microservices.credito.credito.domain.Credito;
 import com.impacta.microservices.credito.credito.service.CreditoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Tag(name="Credito endpoint")
 @RestController
@@ -43,23 +45,23 @@ public class CreditoController {
 
     //GET PARA CONSULTAR TRANSACOES DE CREDITO POR CONTA CORRENTE
     @GetMapping(path = "/extrato/contacorrente/{contaId}")
-    public List<Credito> consultaExtratoContaCorrente(@PathVariable("contaId") Integer contaId) {
-        return  creditoService.consultaContaIdContaCorrente(contaId);
-    }
+	public List<Credito> consultaExtratoContaCorrente(@PathVariable("contaId") Integer contaId) {
+		return  creditoService.consultaContaIdContaCorrente(contaId);
+	}
 
     //GET PARA CONSULTAR TRANSACOES DE CREDITO POR CONTA INVESTIMENTO
-    @GetMapping(path = "/extrato/investimento/{contaId}")
+    @GetMapping(path = "/extrato/investimento/{contaId}") 
     public List<Credito> consultaExtratoContaInvestimento(@PathVariable("contaId") Integer contaId) {
         return creditoService.consultaContaIdInvestimento(contaId);
     }
 
     //GET PARA CONSOLIDAR OS VALORES DE CREDITO EM UMA CONTA CORRENTE
     @GetMapping(path = "/saldo/contacorrente/{contaId}")
-    public SaldoCreditoResponse consultaSaldoConsolidadoContaCorrente(@PathVariable("contaId") Integer contaId) {
+	public SaldoCreditoResponse consultaSaldoConsolidadoContaCorrente(@PathVariable("contaId") Integer contaId) {
         SaldoCreditoResponse saldoCreditoResponse =
                 new SaldoCreditoResponse(creditoService.consultaSaldoContaIdContaCorrente(contaId));
         return  saldoCreditoResponse;
-    }
+	}
 
     //GET PARA CONSOLIDAR OS VALORES DE CREDITO EM UMA CONTA INVESTIMENTO
     @GetMapping(path = "/saldo/investimento/{contaId}")
